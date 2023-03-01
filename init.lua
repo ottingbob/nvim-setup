@@ -53,6 +53,13 @@ vim.keymap.set('n', '<leader>,', ",", {noremap = true})
 vim.keymap.set('n', '<leader>ev', "<cmd>split ~/.config/nvim/init.lua<cr>", {noremap = true}) 
 vim.keymap.set('n', '<leader>vev', "<cmd>vsplit ~/.config/nvim/init.lua<cr>", {noremap = true}) 
 
+-- Diagnostic in quickfix
+vim.diagnostic.config({
+  virtual_text = false
+})
+vim.o.updatetime = 250
+vim.cmd("autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})")
+
 -- Golang config
 require 'lspconfig'.gopls.setup{}
 

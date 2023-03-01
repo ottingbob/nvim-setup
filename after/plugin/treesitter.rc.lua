@@ -22,7 +22,10 @@ ts.setup {
     "markdown_inline",
     "go",
     "dockerfile",
-    "bash"
+    "bash",
+    "help",
+    "c",
+    "vim"
   },
   sync_install = false,
   auto_install = true,
