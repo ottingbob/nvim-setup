@@ -2,9 +2,6 @@
 require('base')
 require('plugins')
 
--- Allow NERDTree to show hidden files
-vim.cmd("let NERDTreeShowHidden=1")
-
 -- File config
 vim.filetype.add({
   extension = {
@@ -50,7 +47,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Shortcut Commands
-vim.keymap.set('n', '<leader>b', "<cmd>NERDTreeToggle<cr>", {noremap = true}) 
+vim.keymap.set('n', '<leader>b', "<cmd>NvimTreeToggle<cr>", {noremap = true})
 vim.keymap.set('n', '<leader>w', "<cmd>w %<cr>", {noremap = true}) 
 vim.keymap.set('n', '<leader>,', ",", {noremap = true}) 
 vim.keymap.set('n', '<leader>ev', "<cmd>split ~/.config/nvim/init.lua<cr>", {noremap = true}) 

@@ -30,6 +30,9 @@ vim.opt.tabstop = 2
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Helps with the omnicomplete menu and not auto selecting values
+table.insert(vim.opt.completeopt, 'noinsert')
+
 -- Disable the mouse
 vim.opt.mouse= ""
 vim.opt.ruler = true

@@ -17,8 +17,15 @@ ts.setup {
     "yaml",
     "css",
     "html",
-    "lua"
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "go",
+    "dockerfile",
+    "bash"
   },
+  sync_install = false,
+  auto_install = true,
   autotag = {
     enable = true,
   },
