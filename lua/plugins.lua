@@ -74,14 +74,20 @@ require('packer').startup(function(user)
     end
   }
 
-  --[[
+  -- Leap - motion throughout files
+  -- this plugin DOES remap the `x` key
+  use 'ggandor/leap.nvim'
+
+  -- Surround -- improved selection surround commands
   use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      -- optional, for file icons
-      'nvim-tree/nvim-web-devicons',
-    }
+    "kylechui/nvim-surround",
+    tag = "v1.0.0",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
   }
-  --]]
+
 end)
 
