@@ -12,6 +12,9 @@ require('packer').startup(function(user)
 
   use 'neovim/nvim-lspconfig'
 
+  -- LSP status
+  use 'j-hui/fidget.nvim'
+
   -- VSCode-like pictograms
   use "onsails/lspkind-nvim"
   -- Snippet engine(s)
@@ -35,10 +38,12 @@ require('packer').startup(function(user)
   -- Syntax highlighting & theme
   use { 'ellisonleao/gruvbox.nvim' }
 
+  -- Fuzzy finder
   use {'junegunn/fzf', run = ':call fzf#install()' }
 
   use 'stephpy/vim-yaml'
 
+  -- File explorer
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -47,11 +52,12 @@ require('packer').startup(function(user)
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
+  -- Telescope helps find files with the use of rg
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-  -- TODO: Not sure if I need these. Could optionally remove some of the references in the after/plugin file...
+  -- TODO: Double check if this is needed to search the file tree
   use 'nvim-telescope/telescope-file-browser.nvim'
 
   -- Better looking tabs
@@ -75,7 +81,6 @@ require('packer').startup(function(user)
   }
 
   -- Leap - motion throughout files
-  -- this plugin DOES remap the `x` key
   use 'ggandor/leap.nvim'
 
   -- Surround -- improved selection surround commands
