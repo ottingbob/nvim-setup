@@ -56,10 +56,8 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {noremap = true})
 vim.keymap.set('n', '<leader>ff', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- vim.keymap.set('n', '<leader>fr', builtin.old_files, {})
+vim.keymap.set('n', '<leader>fr', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>a', builtin.diagnostics, {noremap = true})
 vim.keymap.set('n', ':gd', builtin.lsp_definitions, {noremap = true})
 vim.keymap.set('n', ':gr', builtin.lsp_references, {noremap = true})
 vim.keymap.set('n', '<leader>fb', builtin.current_buffer_fuzzy_find, {})
-
-

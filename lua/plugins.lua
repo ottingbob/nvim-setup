@@ -63,6 +63,12 @@ require('packer').startup(function(user)
   -- Better looking tabs
   use 'akinsho/nvim-bufferline.lua'
 
+  -- Git decorations
+  use {
+    'lewis6991/gitsigns.nvim',
+    tag = 'v0.6',
+  }
+
   -- Used for golang syntax highlighting / LSP support
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'

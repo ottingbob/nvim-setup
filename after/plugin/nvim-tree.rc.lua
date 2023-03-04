@@ -26,6 +26,12 @@ nt.setup({
   filters = {
     dotfiles = true,
   },
+  diagnostics = {
+    enable = true,
+  },
+  update_focused_file = {
+    enable = true,
+  },
 })
 
 local function open_nvim_tree(data)
