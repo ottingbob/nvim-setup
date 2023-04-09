@@ -81,7 +81,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
   callback = function()
+    -- vim.cmd("silent! !python -m isort %")
     vim.cmd("silent! !python -m black %")
-    vim.cmd("silent! !python -m isort %")
+    vim.cmd("silent! !python -m ruff check --fix %")
   end
 })
