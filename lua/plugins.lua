@@ -73,6 +73,12 @@ require('packer').startup(function(user)
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
 
+  -- Scala LSP support
+  use {
+    'scalameta/nvim-metals',
+    requires = { "nvim-lua/plenary.nvim" }
+  }
+
   -- Popular language parser for syntax highlightings
   use 'nvim-treesitter/nvim-treesitter'
 
@@ -84,6 +90,13 @@ require('packer').startup(function(user)
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
+  }
+
+  -- Markdown Viewer
+  use {
+    "iamcco/markdown-preview.nvim",
+    -- Installs without using yarn / npm
+    run = function() vim.fn["mkdp#util#install"]() end,
   }
 
   -- Leap - motion throughout files
