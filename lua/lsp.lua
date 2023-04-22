@@ -79,6 +79,13 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal ts=2 sw=2 sts=2 expandtab"
 })
 vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.scala",
+  callback = function()
+    -- TODO: Should check if metals is installed...
+    vim.cmd("MetalsRunScalafix")
+  end
+})
+vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
   callback = function()
     -- vim.cmd("silent! !python -m isort %")
