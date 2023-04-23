@@ -13,7 +13,9 @@ bufferline.setup({
   -- TODO: Configure highlights / coloring based on your terminal setup...
 })
 
-vim.keymap.set('n', '<C-l>', '<Cmd>BufferLineCycleNext<CR>', {})
-vim.keymap.set('n', '<C-h>', '<Cmd>BufferLineCyclePrev<CR>', {})
+-- FIXME: This conflicts with window navigation
+-- vim.keymap.set('n', '<C-l>', '<Cmd>BufferLineCycleNext<CR>', {})
+-- vim.keymap.set('n', '<C-h>', '<Cmd>BufferLineCyclePrev<CR>', {})
+
 -- vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
 
