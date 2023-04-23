@@ -84,7 +84,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.scala",
   callback = function()
     -- TODO: Should check if metals is installed...
-    vim.cmd("MetalsRunScalafix")
+    vim.cmd("silent! MetalsRunScalafix")
+    vim.lsp.buf.format({ async = true })
   end
 })
 vim.api.nvim_create_autocmd("BufWritePost", {
