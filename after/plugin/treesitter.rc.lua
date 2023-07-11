@@ -23,7 +23,6 @@ ts.setup {
     "go",
     "dockerfile",
     "bash",
-    "help",
     "c",
     "vim"
   },
