@@ -7,6 +7,8 @@ require("gruvbox").setup({
   bold = true,
   strikethrough = true,
   italic = {
+    -- If these are set to `true` they will highlight the background of the given tokens
+    -- so I disable them since it seems a little jarring
     strings = false,
     comments = false,
     operators = false,
