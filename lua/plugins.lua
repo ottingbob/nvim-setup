@@ -60,6 +60,12 @@ require('packer').startup(function(user)
   -- TODO: Double check if this is needed to search the file tree
   use 'nvim-telescope/telescope-file-browser.nvim'
 
+  -- Find and Replace
+  use {
+    'nvim-pack/nvim-spectre',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
   -- Better looking tabs
   use 'akinsho/nvim-bufferline.lua'
 
@@ -72,6 +78,9 @@ require('packer').startup(function(user)
   -- Used for golang syntax highlighting / LSP support
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua'
+
+  -- Rust LSP support
+  use 'simrat39/rust-tools.nvim'
 
   -- Scala LSP support
   use {
