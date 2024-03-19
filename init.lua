@@ -1,8 +1,31 @@
+-- TODO: Can probably have this in another file and set up some
+--  different options other than just `lazy = true`
+--
+-- Init lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- Load the related files
 require('base')
-require('plugins')
+require("lazy").setup('lazyplugins', {
+  lazy = true,  
+})
+-- Packer plugins
+-- require('plugins')
 require('lsp')
 require('terminal')
+
+
 
 -- Shortcut Commands
 vim.keymap.set('n', '<leader>b', "<cmd>NvimTreeToggle<cr>", {noremap = true})
