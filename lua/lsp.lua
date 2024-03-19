@@ -1,10 +1,16 @@
 local lsp = require('lspconfig')
 
+-- nvim-lspconfig docs
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+
 -- Golang config
 lsp.gopls.setup{}
 
 -- Python config
 lsp.pylsp.setup{}
+
+-- Typescript config
+lsp.tsserver.setup{}
 
 -- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -61,8 +67,8 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal ts=2 sw=2 expandtab"
 })
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "javascript",
-  command = "setlocal ts=4 sw=4 sts=0 noexpandtab"
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  command = "setlocal ts=2 sw=2 sts=0 noexpandtab"
 })
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
@@ -80,6 +86,10 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   command = "setlocal ts=2 sw=2 sts=2 expandtab"
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  command = "setlocal ts=2 sw=2 sts=2 expandtab"
+})
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.scala",
   callback = function()
@@ -91,8 +101,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
   callback = function()
-    -- vim.cmd("silent! !python -m isort %")
+    vim.cmd("silent! !python -m isort %")
     vim.cmd("silent! !python -m black %")
-    vim.cmd("silent! !python -m ruff check --fix %")
+    -- vim.cmd("silent! !python -m ruff check --fix %")
+  end
+})
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.rs",
+  callback = function()
+    vim.cmd("silent! !cargo fmt")
   end
 })
