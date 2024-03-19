@@ -8,17 +8,31 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+local function custom_on_attach(bufnr)
+  local api = require("nvim-tree.api")
+
+  local function opts(desc)
+    return {
+      desc = "nvim-tree: " .. desc,
+      buffer = bufnr,
+      noremap = true,
+      nowait = true
+    }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', 's', api.node.open.vertical, opts('Split'))
+end
+
 nt.setup({
+  on_attach = custom_on_attach,
   sort_by = "case_sensitive",
   view = {
     width = 30,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-        -- This overrides the nvim-tree.system_open action
-        { key = "s", action = "vsplit" },
-      },
-    },
   },
   renderer = {
     group_empty = true,
