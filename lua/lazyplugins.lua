@@ -153,4 +153,17 @@ return {
         })
     end
   },
+
+  -- Github PR / Issues
+  {
+    'pwntester/octo.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    config = function()
+      require("octo").setup()
+    end,
+  }
 }
