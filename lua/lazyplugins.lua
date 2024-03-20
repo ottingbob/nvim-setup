@@ -36,7 +36,8 @@ return {
   -- File explorer
   {
     'nvim-tree/nvim-tree.lua',
-    version = 'nightly', -- optional, updated every week. (see issue #1193)
+    -- version = 'nightly', -- optional, updated every week. (see issue #1193)
+    version = "v1.1.1",
     lazy = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
