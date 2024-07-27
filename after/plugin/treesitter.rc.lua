@@ -13,6 +13,7 @@ ts.setup {
   ignore_install = {
     "help"
   },
+  --[[
   ensure_installed = {
     "tsx",
     "toml",
@@ -29,11 +30,9 @@ ts.setup {
     "c",
     "vim"
   },
+  --]]
   sync_install = false,
   auto_install = true,
-  autotag = {
-    enable = true,
-  },
 }
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
