@@ -5,9 +5,10 @@ if (not status) then return end
 go.setup({
   -- Default go command
   go = "go",
-  goimport = "gopls",
+  goimports = "gopls",
   gofmt = "gofumpt",
-  max_line_len = 120,
+  -- go.nvim max_line_len only effective when gofmt is golines
+  -- max_line_len = 120,
 })
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
