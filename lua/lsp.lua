@@ -62,6 +62,8 @@ vim.filetype.add({
     peg = 'go'
   }
 })
+
+-- Filetype extensions and tabbing
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "html",
   command = "setlocal ts=2 sw=2 expandtab"
@@ -90,6 +92,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   command = "setlocal ts=2 sw=2 sts=2 expandtab"
 })
+
+-- Filetype macros to run on save
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.scala",
   callback = function()
@@ -98,14 +102,42 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.lsp.buf.format({ async = true })
   end
 })
+
+-- Helper method to check if tool exists
+local function tool_exists(tool)
+  local handle = io.popen("command -v " .. tool)
+  local result = handle:read("*a")
+  handle:close()
+  -- returns true if command is found
+  return result ~= ""
+end
+
+-- Check to see if ruff exists
+local ruff_exists = tool_exists("ruff")
+-- Check to see if black exists
+local black_exists = tool_exists("black")
+-- Check to see if isort exists
+local isort_exists = tool_exists("isort")
+
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
   callback = function()
-    vim.cmd("silent! !python -m isort %")
-    vim.cmd("silent! !python -m black %")
-    -- vim.cmd("silent! !python -m ruff check --fix %")
+
+    -- TODO: Might want to see if ruff fails and still use isort/black if so
+    -- Use ruff if available otherwise use isort & black
+    if ruff_exists then
+      -- Ruff does not support sorting imports
+      -- https://docs.astral.sh/ruff/formatter/#sorting-imports
+      vim.cmd("silent! !python -m ruff check --fix %")
+      vim.cmd("silent! !python -m ruff format %")
+    elseif black_exists and isort_exists then
+      vim.cmd("silent! !python -m isort %")
+      vim.cmd("silent! !python -m black %")
+    end
+
   end
 })
+
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.rs",
   callback = function()
