@@ -10,7 +10,29 @@ lsp.gopls.setup{}
 lsp.pylsp.setup{}
 
 -- Typescript config
-lsp.tsserver.setup{}
+lsp.ts_ls.setup{}
+
+-- Rust config
+lsp.rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true,
+      },
+    }
+  }
+})
 
 -- https://github.com/neovim/nvim-lspconfig#Suggested-configuration
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
