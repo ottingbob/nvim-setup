@@ -166,5 +166,11 @@ return {
     config = function()
       require("octo").setup()
     end,
-  }
+  },
+
+  -- HTTP Client
+  {
+    'mistweaverco/kulala.nvim',
+    opts = {},
+  },
 }
