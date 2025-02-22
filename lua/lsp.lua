@@ -3,14 +3,70 @@ local lsp = require('lspconfig')
 -- nvim-lspconfig docs
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "Tiltfile", "tiltfile" },
+  callback = function()
+    vim.bo.filetype = "tiltfile"
+  end,
+})
+
+-- Deno config
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+-- NOTE: This should work with the `ts_ls` entry now. Previously, in order for
+--   this to have an affect, I had to disable the `ts_ls` entry below so this
+--   would always run.
+lsp.denols.setup{
+  -- https://github.com/hasundue/nvim/blob/main/lua/lang/deno.lua
+  root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
+  settings = {
+    deno = {
+      enable = true,
+    },
+    typescript = {
+      inlayHints = {
+        enabled = "on",
+        functionLikeReturnTypes = { enabled = true },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+      },
+    },
+  },
+  single_file_support = true,
+}
+
+-- Tilt config
+lsp.tilt_ls.setup{}
+
 -- Golang config
 lsp.gopls.setup{}
 
 -- Python config
-lsp.pylsp.setup{}
+lsp.pylsp.setup{
+  -- NOTE: In your project ensure to have the dev dep: `python-lsp-ruff`
+  -- https://github.com/python-lsp/python-lsp-ruff
+
+  -- Include ruff config in here...
+  plugins = {
+    ruff = {
+      enabled = true,
+      formatEnabled = true,
+      -- Ensure these rules are used
+      extendSelect = { "F", "E", "W", "I001", "E501" },
+
+      -- Below rules are ignored when pyproject.toml / ruff.toml is present
+      lineLength = 100,
+      exclude = { "__about__.py" },
+    },
+  }
+}
 
 -- Typescript config
-lsp.ts_ls.setup{}
+lsp.ts_ls.setup{
+  root_dir = lsp.util.root_pattern("package.json"),
+  single_file_support = false,
+}
 
 -- Rust config
 lsp.rust_analyzer.setup({
@@ -150,6 +206,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     if ruff_exists then
       -- Ruff does not support sorting imports
       -- https://docs.astral.sh/ruff/formatter/#sorting-imports
+      --
+      -- NOTE: Ruff should do this stuff by default already...
+      --   Instead we should just use the configs set above in the `pylsp` block
       vim.cmd("silent! !python -m ruff check --fix %")
       vim.cmd("silent! !python -m ruff format %")
     elseif black_exists and isort_exists then
