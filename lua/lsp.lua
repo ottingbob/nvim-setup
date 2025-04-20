@@ -10,13 +10,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+--[[
 -- Deno config
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
--- NOTE: This should work with the `ts_ls` entry now. Previously, in order for
---   this to have an affect, I had to disable the `ts_ls` entry below so this
---   would always run.
+-- -- NOTE: This should work with the `ts_ls` entry now. Previously, in order for
+-- --   this to have an affect, I had to disable the `ts_ls` entry below so this
+-- --   would always run.
 lsp.denols.setup{
   -- https://github.com/hasundue/nvim/blob/main/lua/lang/deno.lua
   root_dir = lsp.util.root_pattern("deno.json", "deno.jsonc"),
@@ -35,6 +36,7 @@ lsp.denols.setup{
   },
   single_file_support = true,
 }
+]]--
 
 -- Tilt config
 lsp.tilt_ls.setup{}
