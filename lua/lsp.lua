@@ -38,6 +38,10 @@ lsp.denols.setup{
 }
 ]]--
 
+-- Postgres config
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp
+lsp.postgres_lsp.setup{}
+
 -- Tilt config
 lsp.tilt_ls.setup{}
 
